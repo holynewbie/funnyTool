@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>使用Prism高亮代码</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="prism.css.js"></script>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		textarea{
+			display: block;
+			width: 600px;
+			height: 200px;
+			margin: 0px auto;
+			word-wrap: break-word;
+			box-sizing: border-box;
+			font: inherit;
+			resize: vertical;
+			overflow: auto;
+			text-rendering: optimizeLegibility;
+			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+			padding: .5em;
+			font-size: 1rem;
+			line-height: 1.2;
+			color: #555;
+			vertical-align: middle;
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 0;
+		}
+		textarea:focus{
+			border: 1px solid green;
+		}
+		/* 通用自定义按钮-默认蓝色 */
+		.u-btn{display:inline-block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;padding:0 12px;height:28px;line-height:28px;border:1px solid #2d88bf;border-radius:5px;font-size:12px;letter-spacing:1px;text-align:center;vertical-align:middle;cursor:pointer;word-wrap:normal;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);text-shadow:0 -1px rgba(0,0,0,0.2);background:-webkit-gradient(linear,0% 0%,0% 100%,from(#6dbde4),to(#399dd8));background:-webkit-linear-gradient(#6dbde4,#399dd8);background:-moz-linear-gradient(#6dbde4,#399dd8);background:-ms-linear-gradient(#6dbde4,#399dd8);background:linear-gradient(#6dbde4,#399dd8);}
+		.u-btn,.u-btn:hover{color:#fff;text-decoration:none;}
+		.u-btn:hover,.u-btn:focus{background:#399dd8;}
+		.u-btn:active{box-shadow:inset 0 1px 4px rgba(0,0,0,0.2);}
+		.u-btn::-moz-focus-inner{padding:0;margin:0;border:0;}
+		.u-btn .btnsel{display:inline-block;vertical-align:middle;border-style:solid;border-width:4px 4px 0;border-color:rgba(255,255,255,0.8) transparent transparent;}
+		.u-btn:hover .btnsel,.u-btn:focus .btnsel{border-top-color:rgba(255,255,255,1);}
+		/* 较大 */
+		.u-btn-lg{padding:0 15px;height:36px;line-height:36px;font-size:18px;}
+		/* 绿色 */
+		.u-btn-c3{border-color:#52a552;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#68c668),to(#50b150));background:-webkit-linear-gradient(#68c668,#50b150);background:-moz-linear-gradient(#68c668,#50b150);background:-ms-linear-gradient(#68c668,#50b150);background:linear-gradient(#68c668,#50b150);}
+		.u-btn-c3:hover,.u-btn-c3:focus{background:#50b150;}
+		.container{
+			margin: auto 20%;
+		}
+
+	</style>
+</head>
+<body>
+	<textarea id="input" cols="80" rows=10></textarea>
+	<br/>
+	<button class="u-btn u-btn-lg" onclick="highlight()">高亮</button>
+	<button class="u-btn u-btn-lg u-btn-c3" onclick="copy()" disabled id="copy">复制</button>
+	<br/>
+	<br/>
+	<div class="container">
+		<pre><code class="language-javascript"></code></pre>
+	</div>
+	
+<script type="text/javascript" src="prism.js" data-manual></script>
+<script type="text/javascript">
+	function highlight(){
+		document.querySelector('code').innerHTML = document.querySelector('textarea').value;
+		Prism.highlightAll();
+		document.querySelector('#copy').removeAttribute('disabled');
+	}
+	function copy(){
+		document.execCommand('copy');
+	}
+	document.addEventListener('copy', function(e){
+    	e.clipboardData.setData('text/html', document.querySelector('pre').outerHTML);
+    	e.preventDefault();
+	});
+</script>
+</body>
+</html>
